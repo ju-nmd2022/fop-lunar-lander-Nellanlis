@@ -215,5 +215,81 @@ function spaceship() {
   ellipse(x + s, y - 105 * s, s * 8);
 }
 
+//astronaut guy sad
+function astronaut1() {
+  fill(255, 255, 255);
+  stroke(0, 0, 0);
+  strokeWeight(1);
+  //body
+  rect(x - 80 * s, y + 65 * s, 20 * s, 20 * s);
+  //head
+  ellipse(x - 70 * s, y + 51 * s, 40 * s);
+  //arms
+  ellipse(x - 82.5 * s, y + 75 * s, 7.5 * s, 15 * s);
+  ellipse(x - 57.5 * s, y + 75 * s, 7.5 * s, 15 * s);
+  //feet
+  ellipse(x - 75 * s, y + 85 * s, 11 * s);
+  ellipse(x - 65 * s, y + 85 * s, 11 * s);
+  noStroke();
+  fill(200, 200, 200);
+  ellipse(x - 75 * s, y + 85 * s, 7.5 * s);
+  ellipse(x - 65 * s, y + 85 * s, 7.5 * s);
+  //face
+  fill(0, 0, 0);
+  ellipse(x - 70 * s, y + 60 * s, 30 * s, 15 * s);
+  fill(255, 255, 255);
+  ellipse(x - 80 * s, y + 57.5 * s, 5 * s, 2.5 * s);
+
+  //tear
+  fill(0, 191, 255);
+  beginShape();
+  vertex(x - 80 * s, y + 62.5 * s);
+  bezierVertex(
+    x - 90 * s,
+    y + 75 * s,
+    x - 70 * s,
+    y + 75 * s,
+    x - 80 * s,
+    y + 62.5 * s
+  );
+  endShape();
+}
+
+// astronaut guy happy
+function astronaut2() {
+  fill(255, 255, 255);
+  stroke(0, 0, 0);
+  strokeWeight(1);
+  //body
+  rect(x - 80 * s, y + 65 * s, 20 * s, 20 * s);
+  //head
+  ellipse(x - 70 * s, y + 51 * s, 40 * s);
+  //arms
+  ellipse(x - 86 * s, y + 71 * s, 15 * s, 7.5 * s);
+  ellipse(x - 57.5 * s, y + 75 * s, 7.5 * s, 15 * s);
+  //feet
+  rect(x - 78.5 * s, y + 85 * s, 7.5 * s, 7.5 * s);
+  rect(x - 69 * s, y + 85 * s, 7.5 * s, 7.5 * s);
+  ellipse(x - 76.5 * s, y + 93 * s, 10 * s, 6 * s);
+  ellipse(x - 63 * s, y + 93 * s, 10 * s, 6 * s);
+  //face
+  noStroke();
+  fill(0, 0, 0);
+  ellipse(x - 70 * s, y + 49.5 * s, 32.5 * s, 27.5 * s);
+  push();
+  translate(x - 80 * s, y + 45 * s);
+  rotate(2.2);
+  fill(255, 255, 255);
+  ellipse(0, 0, 9 * s, 5 * s);
+  pop();
+  //flag
+  stroke(255, 255, 255);
+  fill(255, 255, 255);
+  strokeWeight(3);
+  line(x - 92.5 * s, y + 80 * s, x - 92.5 * s, y + 5 * s);
+  rect(x - 135 * s, y + 7.5 * s, 40 * s, 30 * s);
+}
+
 fire();
 spaceship();
+astronaut1();
