@@ -38,8 +38,8 @@ function draw() {
 pop();
 
 // the moon
-fill(145, 145, 145);
-rect(0, 450, 600, 120);
+fill(145, 145, 145, 100);
+rect(0, 450, width, 120);
 
 // the spaceship
 let x = 300;
@@ -62,6 +62,8 @@ function spaceship() {
   fill(255, 255, 0);
   rect(0 * s, -9 * s, 50 * s, 30 * s);
   pop();
+
+  //fire
 
   //yellow by fire
   fill(255, 255, 0);
@@ -106,6 +108,44 @@ function spaceship() {
     y + 90 * s
   );
   endShape();
+
+  //window
+  fill(0, 191, 255);
+  ellipse(x, y, s * 55);
+  fill(0, 255, 255);
+  ellipse(x, y, s * 40);
+  fill(255, 255, 255);
+  ellipse(x - 12 * s, y - 4 * s, s * 8);
+  ellipse(x - 3 * s, y - 10 * s, s * 11);
+
+  //top of the spaceship
+  fill(100, 255, 0);
+  beginShape();
+  vertex(x - 60 * s, y - 50 * s);
+  bezierVertex(
+    x - 20 * s,
+    y - 40 * s,
+    x + 20 * s,
+    y - 40 * s,
+    x + 60 * s,
+    y - 50 * s
+  );
+  bezierVertex(
+    x + 20 * s,
+    y - 100 * s,
+    x - 20 * s,
+    y - 100 * s,
+    x - 60 * s,
+    y - 50 * s
+  );
+  endShape();
+
+  //antenna on top
+  fill(255, 255, 255);
+  stroke(255, 255, 255);
+  strokeWeight(4);
+  line(x + s, y - 80 * s, x + s, y - 105 * s);
+  ellipse(x + s, y - 105 * s, s * 8);
 }
 
 spaceship();
