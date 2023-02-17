@@ -18,13 +18,6 @@ function drawParticle(particle) {
   ellipse(0, 0, 1.5);
   pop();
 }
-function joinParticle(particle) {
-  let dis = dist(particle.x, particle.y);
-  if (dis < 40) {
-    stroke(255, 255, 255, 0.04);
-    line(particle.x, particle.y);
-  }
-}
 
 function updateParticle(particle) {
   particle.x = particle.x;
@@ -40,10 +33,79 @@ function draw() {
   for (let particle of particles) {
     drawParticle(particle);
     updateParticle(particle);
-    joinParticle(particle.slice(i));
   }
 }
 pop();
 
+// the moon
 fill(145, 145, 145);
 rect(0, 450, 600, 120);
+
+// the spaceship
+let x = 300;
+let y = 300;
+let s = 1;
+noStroke();
+
+function spaceship() {
+  // yellow spacers
+  push();
+  translate(x - 80 * s, y + 40 * s);
+  rotate(2.5);
+  fill(255, 255, 0);
+  rect(-30 * s, -20 * s, 50 * s, 30 * s);
+  pop();
+
+  push();
+  translate(x + 60 * s, y + 20 * s);
+  rotate(0.7);
+  fill(255, 255, 0);
+  rect(0 * s, -9 * s, 50 * s, 30 * s);
+  pop();
+
+  //yellow by fire
+  fill(255, 255, 0);
+  beginShape();
+  vertex(x + 30 * s, x + 60 * s);
+  vertex(x - 30 * s, y + 60 * s);
+  vertex(x - 35 * s, y + 80 * s);
+  bezierVertex(
+    x - 10 * s,
+    y + 75 * s,
+    x + 10 * s,
+    y + 75 * s,
+    x + 35 * s,
+    y + 80 * s
+  );
+  endShape();
+
+  //body
+  fill(255, 16, 240);
+  ellipse(x, y, 150 * s);
+
+  // feet
+  beginShape();
+  vertex(x - 120 * s, y + 90 * s);
+  bezierVertex(
+    x - 120 * s,
+    y + 20 * s,
+    x - 80 * s,
+    y + 20 * s,
+    x - 80 * s,
+    y + 90 * s
+  );
+  endShape();
+  beginShape();
+  vertex(x + 120 * s, y + 90 * s);
+  bezierVertex(
+    x + 120 * s,
+    y + 20 * s,
+    x + 80 * s,
+    y + 20 * s,
+    x + 80 * s,
+    y + 90 * s
+  );
+  endShape();
+}
+
+spaceship();
