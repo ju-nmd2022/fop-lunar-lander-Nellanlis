@@ -47,8 +47,77 @@ let y = 300;
 let s = 1;
 noStroke();
 
+function fire() {
+  //darkest part of fire
+  fill(30, 144, 255);
+  beginShape();
+  vertex(x - 25 * s, y + 75 * s);
+  bezierVertex(
+    x - 25 * s,
+    y + 95 * s,
+    x - 15 * s,
+    y + 105 * s,
+    x + s,
+    y + 120 * s
+  );
+  bezierVertex(
+    x + 20 * s,
+    y + 105 * s,
+    x + 25 * s,
+    y + 95 * s,
+    x + 25 * s,
+    y + 75 * s
+  );
+  endShape();
+
+  //middle part of fire
+  fill(0, 191, 255);
+  beginShape();
+  vertex(x - 20 * s, y + 75 * s);
+  bezierVertex(
+    x - 20 * s,
+    y + 90 * s,
+    x - 10 * s,
+    y + 100 * s,
+    x + s,
+    y + 110 * s
+  );
+  bezierVertex(
+    x + 15 * s,
+    y + 100 * s,
+    x + 20 * s,
+    y + 90 * s,
+    x + 20 * s,
+    y + 75 * s
+  );
+  endShape();
+
+  //lightest part of fire
+  noStroke();
+  fill(0, 255, 255);
+  beginShape();
+  vertex(x - 10 * s, y + 70 * s);
+  bezierVertex(
+    x - 14 * s,
+    y + 86 * s,
+    x - 15 * s,
+    y + 88 * s,
+    x + s,
+    y + 100 * s
+  );
+  bezierVertex(
+    x + 14 * s,
+    y + 86 * s,
+    x + 15 * s,
+    y + 88 * s,
+    x + 10 * s,
+    y + 77 * s
+  );
+  endShape();
+}
+
 function spaceship() {
-  // yellow spacers
+  //yellow spacers
   push();
   translate(x - 80 * s, y + 40 * s);
   rotate(2.5);
@@ -62,8 +131,6 @@ function spaceship() {
   fill(255, 255, 0);
   rect(0 * s, -9 * s, 50 * s, 30 * s);
   pop();
-
-  //fire
 
   //yellow by fire
   fill(255, 255, 0);
@@ -148,4 +215,5 @@ function spaceship() {
   ellipse(x + s, y - 105 * s, s * 8);
 }
 
+fire();
 spaceship();
