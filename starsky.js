@@ -44,7 +44,7 @@ rect(0, 450, width, 120);
 // the spaceship
 let x = 300;
 let y = 300;
-let s = 1;
+let s = 2;
 noStroke();
 
 function fire() {
@@ -283,8 +283,9 @@ function astronaut2() {
   ellipse(0, 0, 9 * s, 5 * s);
   pop();
   //flag
+  noStroke();
+  fill(100, 255, 0);
   stroke(255, 255, 255);
-  fill(255, 255, 255);
   strokeWeight(3);
   line(x - 92.5 * s, y + 80 * s, x - 92.5 * s, y + 5 * s);
   rect(x - 135 * s, y + 7.5 * s, 40 * s, 30 * s);
@@ -292,4 +293,4 @@ function astronaut2() {
 
 fire();
 spaceship();
-astronaut1();
+astronaut2();
