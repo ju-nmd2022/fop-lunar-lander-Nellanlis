@@ -1,9 +1,9 @@
+push();
 let particles = [];
 
 //stars in the sky
 background(0, 0, 0);
 
-push();
 function createParticle() {
   const x = Math.random() * width;
   const y = Math.random() * (height - 140);
@@ -44,12 +44,77 @@ rect(0, 450, width, 120);
 // the spaceship
 let x = 300;
 let y = 300;
-let s = 2;
+let s = 0.5;
 noStroke();
+
+function satellite() {
+  push();
+  translate(x - 300, y - 260);
+  rotate(-0.09999);
+  //satellite body
+  fill(255, 255, 255);
+  stroke(255, 255, 255);
+  beginShape();
+  vertex(x + 150, y - 150);
+  bezierVertex(x + 150, y - 160, x + 170, y - 160, x + 170, y - 150);
+  vertex(x + 170, y - 130);
+  bezierVertex(x + 170, y - 120, x + 150, y - 120, x + 150, y - 130);
+  endShape(CLOSE);
+  //top orange bit
+  fill(255, 95, 0);
+  noStroke();
+  ellipse(x + 160, y - 153, 20, 10);
+  fill(255, 150, 0);
+  ellipse(x + 160, y - 153, 13, 6);
+  //ball on top
+  fill(0, 191, 255);
+  ellipse(x + 160, y - 161, 16);
+  ellipse(x + 160, y - 143, 6);
+  fill(255, 255, 0);
+  ellipse(x + 160, y - 135, 3);
+  //wings of satellite
+  fill(50, 205, 50);
+  rect(x + 120, y - 150, 25, 20);
+  rect(x + 175, y - 150, 25, 20);
+  fill(255, 255, 0);
+  rect(x + 124, y - 147, 6, 6);
+  rect(x + 124, y - 139, 6, 6);
+  rect(x + 132, y - 147, 6, 6);
+  rect(x + 132, y - 139, 6, 6);
+  rect(x + 179, y - 147, 6, 6);
+  rect(x + 179, y - 139, 6, 6);
+  rect(x + 187, y - 147, 6, 6);
+  rect(x + 187, y - 139, 6, 6);
+  pop();
+}
+function planets() {
+  noStroke();
+  fill(255, 255, 255, 30);
+  ellipse(x + 45, y - 200, 25);
+  ellipse(x - 150, y - 100, 20);
+  fill(255, 255, 255, 70);
+  ellipse(x + 140, y - 50, 10);
+  ellipse(x - 190, y - 140, 30);
+  ellipse(x + 250, y - 240, 30);
+}
+
+function meteor() {
+  //meteor
+  push();
+  fill(255, 255, 255, 200);
+  ellipse(x - 250, y - 199, 15);
+  pop();
+  beginShape();
+  vertex(x - 250, y - 205);
+  vertex(x - 290, y - 210);
+  vertex(x - 253, y - 195);
+  endShape();
+}
 
 function fire() {
   //darkest part of fire
   fill(30, 144, 255);
+  noStroke();
   beginShape();
   vertex(x - 25 * s, y + 75 * s);
   bezierVertex(
@@ -285,12 +350,23 @@ function astronaut2() {
   //flag
   noStroke();
   fill(100, 255, 0);
+  rect(x - 135 * s, y + 7.5 * s, 40 * s, 30 * s);
   stroke(255, 255, 255);
   strokeWeight(3);
   line(x - 92.5 * s, y + 80 * s, x - 92.5 * s, y + 5 * s);
-  rect(x - 135 * s, y + 7.5 * s, 40 * s, 30 * s);
 }
 
 fire();
 spaceship();
-astronaut2();
+satellite();
+planets();
+meteor();
+
+/*let meteorX = 70;
+
+function draw() {
+  meteor();
+  meteorX = meteorX + 5;
+} */
+
+// Make a satellite in the sky! Or like some spaceship or planets or something.
