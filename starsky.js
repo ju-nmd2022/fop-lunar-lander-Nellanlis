@@ -1,7 +1,38 @@
-push();
-let particles = [];
+// the spaceship
+let x = 300;
+let y = 300;
+let s = 0.5;
+let meteorX = 300;
+let meteorY = 300;
 
-//stars in the sky
+//start button screen
+function startScreen() {
+  push();
+  let col = color(255, 255, 255);
+  let colo = color(0, 0, 0);
+  let startButton = createButton("Start Game");
+  startButton.style("stroke", "5");
+  startButton.style("background-color", colo);
+  startButton.style("font-size", "27px");
+  startButton.style("color", col);
+  startButton.style("border", col);
+  startButton.style("width", "150px");
+  startButton.position(width / 2 - 60, height / 2 - 50);
+  pop();
+
+  //moon
+  fill(0, 0, 0, 60);
+  rect(x - 300, y + 150, width, 150);
+  fill(255, 255, 255);
+  textSize(14);
+  text("land the spaceship slowly and securely on the moon", 145, 350);
+  text("click the space button to move the spaceship upwards", 140, 380);
+}
+
+// Stars in the sky, inspired by Garrit's lecture
+
+const particles = [];
+
 background(0, 0, 0);
 
 function createParticle() {
@@ -29,28 +60,25 @@ for (let i = 100; i < 500; i++) {
   particles.push(particle);
 }
 
-function draw() {
-  for (let particle of particles) {
-    drawParticle(particle);
-    updateParticle(particle);
-  }
+function moon() {
+  fill(50, 50, 50);
+  rect(0, 450, width, 120);
+  fill(100, 100, 100);
+  ellipse(300, 480, 200, 30);
+  stroke(255, 16, 240);
+  strokeWeight(10);
+  beginShape();
+  vertex(190, 480);
+  bezierVertex(250, 430, 350, 430, 410, 480);
+  endShape();
 }
-pop();
-
-// the moon
-fill(145, 145, 145, 100);
-rect(0, 450, width, 120);
-
-// the spaceship
-let x = 300;
-let y = 300;
-let s = 0.5;
-noStroke();
 
 function satellite() {
+  noStroke();
   push();
   translate(x - 300, y - 260);
   rotate(-0.09999);
+
   //satellite body
   fill(255, 255, 255);
   stroke(255, 255, 255);
@@ -60,18 +88,21 @@ function satellite() {
   vertex(x + 170, y - 130);
   bezierVertex(x + 170, y - 120, x + 150, y - 120, x + 150, y - 130);
   endShape(CLOSE);
+
   //top orange bit
   fill(255, 95, 0);
   noStroke();
   ellipse(x + 160, y - 153, 20, 10);
   fill(255, 150, 0);
   ellipse(x + 160, y - 153, 13, 6);
+
   //ball on top
   fill(0, 191, 255);
   ellipse(x + 160, y - 161, 16);
   ellipse(x + 160, y - 143, 6);
   fill(255, 255, 0);
   ellipse(x + 160, y - 135, 3);
+
   //wings of satellite
   fill(50, 205, 50);
   rect(x + 120, y - 150, 25, 20);
@@ -100,14 +131,15 @@ function planets() {
 
 function meteor() {
   //meteor
+  noStroke();
   push();
   fill(255, 255, 255, 200);
-  ellipse(x - 250, y - 199, 15);
+  ellipse(meteorX - 320, meteorY - 199, 15);
   pop();
   beginShape();
-  vertex(x - 250, y - 205);
-  vertex(x - 290, y - 210);
-  vertex(x - 253, y - 195);
+  vertex(meteorX - 320, meteorY - 205);
+  vertex(meteorX - 360, meteorY - 210);
+  vertex(meteorX - 323, meteorY - 195);
   endShape();
 }
 
@@ -356,17 +388,44 @@ function astronaut2() {
   line(x - 92.5 * s, y + 80 * s, x - 92.5 * s, y + 5 * s);
 }
 
-fire();
+/* fire();
 spaceship();
 satellite();
-planets();
-meteor();
+planets(); */
 
-/*let meteorX = 70;
+function gameScreen() {
+  satellite();
+  moon();
+  fire();
+  spaceship();
+}
 
 function draw() {
+  for (let particle of particles) {
+    drawParticle(particle);
+    updateParticle(particle);
+  }
   meteor();
-  meteorX = meteorX + 5;
-} */
+  if (meteorX < 950) {
+    meteorX = meteorX + 5;
+    meteorY = meteorY + 1;
+  } else {
+    meteorX = 300;
+    meteorX = meteorX - 5;
+    meteorY = meteorY - 2;
+  }
 
-// Make a satellite in the sky! Or like some spaceship or planets or something.
+  gameScreen();
+}
+
+/*function draw() {
+  meteor();
+  if (x < 950) {
+    x = x + 5;
+    y = y + 1;
+  } else {
+    x = 300;
+    x = x - 5;
+    y = y - 2;
+  }
+} */
