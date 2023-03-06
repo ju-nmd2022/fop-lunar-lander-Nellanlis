@@ -8,8 +8,9 @@ let meteorY = 300;
 //start button screen
 function startScreen() {
   push();
+  noStroke();
   let col = color(255, 255, 255);
-  let colo = color(0, 0, 0);
+  let colo = color(100, 100, 100);
   let startButton = createButton("Start Game");
   startButton.style("stroke", "5");
   startButton.style("background-color", colo);
@@ -29,6 +30,23 @@ function startScreen() {
   text("click the space button to move the spaceship upwards", 140, 380);
 }
 
+function meteor() {
+  //meteor
+  push();
+  background(0, 0, 0);
+  noStroke();
+  push();
+  fill(255, 255, 255, 200);
+  ellipse(meteorX - 320, meteorY - 199, 15);
+  pop();
+  beginShape();
+  vertex(meteorX - 320, meteorY - 205);
+  vertex(meteorX - 360, meteorY - 210);
+  vertex(meteorX - 323, meteorY - 195);
+  endShape();
+  pop();
+}
+
 // Stars in the sky, inspired by Garrit's lecture
 
 const particles = [];
@@ -37,7 +55,7 @@ background(0, 0, 0);
 
 function createParticle() {
   const x = Math.random() * width;
-  const y = Math.random() * (height - 140);
+  const y = Math.random() * height;
   return { x: x, y: y };
 }
 
@@ -65,12 +83,6 @@ function moon() {
   rect(0, 450, width, 120);
   fill(100, 100, 100);
   ellipse(300, 480, 200, 30);
-  stroke(255, 16, 240);
-  strokeWeight(10);
-  beginShape();
-  vertex(190, 480);
-  bezierVertex(250, 430, 350, 430, 410, 480);
-  endShape();
 }
 
 function satellite() {
@@ -118,6 +130,7 @@ function satellite() {
   rect(x + 187, y - 139, 6, 6);
   pop();
 }
+
 function planets() {
   noStroke();
   fill(255, 255, 255, 30);
@@ -127,20 +140,6 @@ function planets() {
   ellipse(x + 140, y - 50, 10);
   ellipse(x - 190, y - 140, 30);
   ellipse(x + 250, y - 240, 30);
-}
-
-function meteor() {
-  //meteor
-  noStroke();
-  push();
-  fill(255, 255, 255, 200);
-  ellipse(meteorX - 320, meteorY - 199, 15);
-  pop();
-  beginShape();
-  vertex(meteorX - 320, meteorY - 205);
-  vertex(meteorX - 360, meteorY - 210);
-  vertex(meteorX - 323, meteorY - 195);
-  endShape();
 }
 
 function fire() {
@@ -388,44 +387,56 @@ function astronaut2() {
   line(x - 92.5 * s, y + 80 * s, x - 92.5 * s, y + 5 * s);
 }
 
-/* fire();
-spaceship();
-satellite();
-planets(); */
-
 function gameScreen() {
   satellite();
   moon();
-  fire();
-  spaceship();
+  planets();
+  if (keyIsDown(32)) {
+    fire(x, y, 0.5);
+    spaceship(x, y, 0.5);
+  }
 }
+
+let state = "start";
+let velocity = 1;
+let acceleration = 0.1;
+let isGameActive = false;
 
 function draw() {
   for (let particle of particles) {
     drawParticle(particle);
     updateParticle(particle);
   }
+  push();
   meteor();
   if (meteorX < 950) {
-    meteorX = meteorX + 5;
+    meteorX = meteorX + 4.5;
     meteorY = meteorY + 1;
   } else {
     meteorX = 300;
     meteorX = meteorX - 5;
     meteorY = meteorY - 2;
   }
+  pop();
 
-  gameScreen();
+  //The different game screens and game mechanics
+  if (state === "start") {
+    startScreen();
+  } else if (state === "game") {
+    gameScreen();
+  } else if (state === "win") {
+    winScreen();
+  } else if (state === "lose") {
+    loseScreen();
+  }
+
+  if (keyIsDown(32) && state === "start") {
+    state = "game";
+  } else if (keyIsDown(32) && state === "game" && y < 400) {
+    isGameActive = true;
+  } else if (keyIsDown(13) && (state === "lose" || state === "win")) {
+    state = "game";
+  }
 }
 
-/*function draw() {
-  meteor();
-  if (x < 950) {
-    x = x + 5;
-    y = y + 1;
-  } else {
-    x = 300;
-    x = x - 5;
-    y = y - 2;
-  }
-} */
+// if mouseisclicked the fire should be y - 10 or something.Look at Liams repository
