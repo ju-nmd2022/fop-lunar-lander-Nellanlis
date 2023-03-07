@@ -1,4 +1,8 @@
-// the spaceship
+function setup() {
+  createCanvas(592, 570);
+}
+
+//variables
 let x = 300;
 let y = 50;
 let s = 0.5;
@@ -41,37 +45,6 @@ function meteor() {
   vertex(meteorX - 323, meteorY - 195);
   endShape();
   pop();
-}
-
-// Stars in the sky, inspired by Garrit's lecture
-
-const particles = [];
-
-background(0, 0, 0);
-
-function createParticle() {
-  const x = Math.random() * width;
-  const y = Math.random() * height;
-  return { x: x, y: y };
-}
-
-function drawParticle(particle) {
-  push();
-  translate(particle.x, particle.y);
-  noStroke();
-  fill(255, 255, 255, 3);
-  ellipse(0, 0, 1.5);
-  pop();
-}
-
-function updateParticle(particle) {
-  particle.x = particle.x;
-  particle.y = particle.y;
-}
-
-for (let i = 100; i < 500; i++) {
-  const particle = createParticle();
-  particles.push(particle);
 }
 
 function moon() {
@@ -594,10 +567,6 @@ let acceleration = 0.1;
 let isGameActive = false;
 
 function draw() {
-  for (let particle of particles) {
-    drawParticle(particle);
-    updateParticle(particle);
-  }
   push();
   meteor();
   if (meteorX < 950) {
@@ -637,7 +606,7 @@ function draw() {
 
   //making it flyyyy
   if (keyIsDown(32)) {
-    velocity = velocity - 0.4;
+    velocity = velocity - 0.25;
   }
 
   //where to land
